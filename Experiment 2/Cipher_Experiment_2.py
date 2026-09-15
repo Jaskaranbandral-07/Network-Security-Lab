@@ -1,10 +1,16 @@
 import hashlib
+import os
+
+# 'lab_data.txt' sits in the same folder as this script. Building the path from
+# __file__ makes the script find it no matter which folder you run it from -
+# running it from the repo root is what caused the "file not found" error.
+DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lab_data.txt")
 
 # PART 1: GENERATING THE HASH FOR THE FILE
 
 # 1. Open the text file in 'rb' (read binary) mode.
 # Reading in binary means the data is already in bytes, which SHA-256 requires.
-my_file = open("lab_data.txt", "rb")
+my_file = open(DATA_FILE, "rb")
 
 # 2. Read all the data inside the file into a variable
 file_data = my_file.read()
@@ -30,7 +36,7 @@ print("-------------------------------------------------------------------------
 trusted_hash = input("Paste the hash here to verify the file's integrity: ")
 
 # 2. Read and hash the file one more time to check its CURRENT state
-check_file = open("lab_data.txt", "rb")
+check_file = open(DATA_FILE, "rb")
 current_data = check_file.read()
 check_file.close()
 
